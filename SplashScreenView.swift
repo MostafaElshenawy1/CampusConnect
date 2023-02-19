@@ -1,8 +1,8 @@
 //
 //  SplashScreenView.swift
-//  Campus Connect
+//  CampusConnect
 //
-//  Created by Mostafa Elshenawy on 2/18/23.
+//  Created by John Edgar on 2/19/23.
 //
 
 import SwiftUI

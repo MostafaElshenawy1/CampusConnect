@@ -1,93 +1,141 @@
 //
 //  ContentView.swift
-//  Campus Connect
+//  CampusConnect
 //
-//  Created by Mostafa Elshenawy on 2/18/23.
+//  Created by John Edgar on 2/18/23.
 //
-
+// Listing Creation was implemented into this file
 import SwiftUI
+import FirebaseCore
+import Firebase
+
+import FirebaseCore
+import FirebaseFirestore
+import FirebaseAuth
+
 
 struct ContentView: View {
-    @State var selectedIndex = 0
-    @State var filterIndex = 0
-    let tabBarImageNames = ["Home", "Create", "Messages", "Account"]
-    let filters = ["All", "Handyman", "Cleaning", "Tutoring", "Deliveries"]
-    var columns = [GridItem(.adaptive(minimum:160 ), spacing:20)]
+    @ObservedObject var model = ViewModel()
     
+        @State private var Title = ""
+        @State private var Description = ""
+        @State private var Price = ""
+        @State private var Tags = ["Handyman", "Cleaning", "Tutoring", "Delivering"]
+
     var body: some View {
+        
         VStack{
-            ZStack{
-                switch selectedIndex {
-                case 0:
-                    NavigationView {
-                        ScrollView {
-                            LazyVGrid(columns: columns, spacing: 0) {
-                                ForEach(productList.filter { $0.tag == filters[filterIndex] || filterIndex == 0 }, id: \.id) { product in
-                                    Product_Card(product: product)
-                                }
-                            }
-                            .padding()
-                        }
-                        .navigationBarItems(trailing:
-                            Picker(selection: $filterIndex, label: Text("Filter")) {
-                                ForEach(0..<filters.count) {
-                                    Text(filters[$0])
-                                }
-                            }
-                            .pickerStyle(SegmentedPickerStyle())
-                            .frame(width: 380)
-                            .fixedSize(horizontal: true, vertical: false)
-                            .lineLimit(1)
-                        )
-                    }
-                case 1:
-                    NavigationView {
-                        ListingCreation()
-                    }
-                case 2: ScrollView{
-                    Text("TEST2")
-                }
-                case 3: ScrollView{
-                    Text("TEST3")
-                }
-                default:
-                    Text("TEST4")
-                }
+            List (model.list){ item in
+                Text(item.Description)
+                Text(item.Title)
             }
-            Spacer()
+            List(model.list){
+                item in Text(String(item.Price))
+            }
+            List(model.list){
+                item in Text(item.Tags?.joined(separator: ", ") ?? "")
+            }
             
-            HStack{
-                ForEach(0..<4) {num in
-                    Button(action: {
-                        selectedIndex = num
-                    }, label: {
-                        Spacer()
-                        VStack{
-                            Image(tabBarImageNames[num])
-                                .resizable()
-                                .frame(width: 30, height: 30)
-                                .scaledToFit()
-                            Text(tabBarImageNames[num])
-                                .font(.system(size: 15))
-                                .foregroundColor(.black)
-
-                        }
-
-                        Spacer()                    })
+            Divider()
+            VStack(spacing: 5){
+                TextField("Title", text: $Title)
+                    .padding()
+                    .background(Color(.systemGray6))
+                    .cornerRadius(10)
+                    .padding(.horizontal)
+                TextField("Description", text: $Description)
+                    .padding()
+                    .background(Color(.systemGray6))
+                    .cornerRadius(10)
+                    .padding(.horizontal)
+                TextField("Price", text: $Price)
+                    .padding()
+                    .background(Color(.systemGray6))
+                    .cornerRadius(10)
+                    .padding(.horizontal)
+                Picker("Tags", selection: $Tags) {
+                    ForEach(Tags, id: \.self) { tag in
+                        Text(tag)
+                    }
                 }
+                .frame(width: 328, height: 26) // Set width and height to match the title text field
+                .padding()
+                .background(Color(.systemGray6))
+                .cornerRadius(10)
+                .padding(.horizontal)
                 
-                Spacer()
+                
+                Button(action: {
+                    let price = Int64(Price) ?? 0
+                    let tagsArray = $Tags.wrappedValue.joined(separator: ",").components(separatedBy: ",")
+                    model.addData(Title: Title, Description: Description, Price: price, Tags: tagsArray)
+                    
+                    Title = ""
+                    Description = ""
+                    Price = ""
+                    Tags = []
+                    
+                }, label: {
+                    Text("Create Listing")
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.blue)
+                        .cornerRadius(10)
+                        .padding(.horizontal)
+                })
             }
-            .padding(.horizontal)
+            .padding(.top)
+            
+            Spacer()
         }
     }
+    
+    init() {
+        model.getData()
+    }
+    
 }
-
-
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
 }
+
+/*
+struct ContentView: View {
+    @ObservedObject var model = ViewModel()
+    
+    var body: some View {
+        List (model.list){ item in
+            Text(item.Description)
+            Text(item.Title)
+        }
+       List(model.list){
+            item in Text(item.Price)
+        }
+       List(model.list){
+           item in Text(item.Tags)
+        }
+        //List(model.list){
+       //     item in Text(item.Title)
+       // }
+            
+          //  item in Text(item.Title)
+          //  item in Text(item.Price)
+          //  item in Text(item.Tags)
+                         //, item.Description, item.Price, item.Tags)
+    }
+    init() {
+        model.getData()
+    }
+    
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+ }*/
+

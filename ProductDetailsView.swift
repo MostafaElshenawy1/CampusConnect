@@ -1,8 +1,8 @@
 //
 //  ProductDetailsView.swift
-//  test
+//  CampusConnect
 //
-//  Created by Mostafa Elshenawy on 2/18/23.
+//  Created by John Edgar on 2/19/23.
 //
 
 import SwiftUI
@@ -25,12 +25,12 @@ struct ProductDetailsView: View {
                         .bold()
                         .padding(.horizontal)
                     
-                    Text("$\(product.price)")
+                    Text("$\(product.Price)")
                         .font(.title2)
                         .foregroundColor(.red)
                         .padding(.horizontal)
                     
-                    Text(product.description)
+                    Text(product.Description)
                         .font(.body)
                         .foregroundColor(.gray)
                         .lineLimit(nil)

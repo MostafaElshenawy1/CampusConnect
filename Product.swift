@@ -1,8 +1,8 @@
 //
-//  Ad.swift
-//  test
+//  Product.swift
+//  CampusConnect
 //
-//  Created by Mostafa Elshenawy on 2/18/23.
+//  Created by John Edgar on 2/19/23.
 //
 
 import Foundation
@@ -11,21 +11,21 @@ struct Product: Identifiable {
     var id = UUID()
     var name: String
     var image: String
-    var description: String
-    var price: Int
-    var tag: String
+    var Description: String
+    var Price: Int64
+    var Tags: String
 }
 
-var productList = [Product(name: "Re-build my desk", image: "Handyman", description: "test description", price: 50, tag: "Handyman"),
-                   Product(name: "Benson Delivery to the Benton", image: "Deliveries", description: "test description", price: 10, tag: "Deliveries"),
-                   Product(name: "Benson Delivery to Lafayet Appartments", image: "Deliveries", description: "test description", price: 7, tag: "Deliveries"),
-                   Product(name: "Need Math 12 Tutoring", image: "Tutoring", description: "test description", price: 40, tag: "Tutoring"),
-                   Product(name: "Fix my door frame", image: "Handyman", description: "test description", price: 35, tag: "Handyman"),
-                   Product(name: "Clean my house", image: "Cleaning", description: "test description", price: 60, tag: "Cleaning"),
-                   Product(name: "Chem 11 tutoring", image: "Tutoring", description: "test description", price: 20, tag: "Tutoring"),
-                   Product(name: "Clean my backyard", image: "Cleaning", description: "test description", price: 15, tag: "Cleaning"),
-                   Product(name: "Econ tutoring", image: "Tutoring", description: "test description", price: 5, tag: "Tutoring"),
-                   Product(name: "Build me a Die table", image: "Handyman", description: "test description", price: 50, tag: "Handyman"),
+var productList = [Product(name: "Re-build my desk", image: "Desk", Description: "test description", Price: 50, Tags: "Handyman"),
+                   Product(name: "Ad 2", image: "Desk", Description: "test description", Price: 1, Tags: "Deliveries"),
+                   Product(name: "Ad 3", image: "Desk", Description: "test description", Price: 1, Tags: "Deliveries"),
+                   Product(name: "Ad 4", image: "Desk", Description: "test description", Price: 1, Tags: "Tutoring"),
+                   Product(name: "Ad 5", image: "Desk", Description: "test description", Price: 1, Tags: "Handyman"),
+                   Product(name: "Ad 6", image: "Desk", Description: "test description", Price: 1, Tags: "Cleaning"),
+                   Product(name: "Ad 7", image: "Desk", Description: "test description", Price: 1, Tags: "Tutoring"),
+                   Product(name: "Ad 8", image: "Desk", Description: "test description", Price: 1, Tags: "Cleaning"),
+                   Product(name: "Ad 9", image: "Desk", Description: "test description", Price: 1, Tags: "Tutoring"),
+                   Product(name: "Ad 10", image: "Desk", Description: "test description", Price: 1, Tags: "Handyman"),
                    ]
             
 

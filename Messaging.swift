@@ -1,8 +1,8 @@
 //
 //  Messaging.swift
-//  test
+//  CampusConnect
 //
-//  Created by Mostafa Elshenawy on 2/18/23.
+//  Created by John Edgar on 2/19/23.
 //
 
 import SwiftUI
@@ -52,7 +52,7 @@ struct Messaging: View {
                             .font(.headline)
                             .foregroundColor(.primary)
                         
-                        Text("$\(product.price)")
+                        Text("$\(product.Price)")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                     }
